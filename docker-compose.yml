@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    env_file:
+    - ./env/app.env
+    links:
+      - database
+    depends_on:
+      - database
+    ports:
+      - 5000:5000
+    networks:
+      - comp3335-project
+    container_name: comp3335-app
+  database:
+    image: mysql:8.0.31
+    env_file:
+        - ./env/database.env
+    container_name: comp3335-database
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+    networks:
+      - comp3335-project
+
+networks:
+  comp3335-project:
+    driver: bridge
