@@ -13,3 +13,7 @@ CREATE TABLE post (
     create_datetime datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
+
+CREATE USER 'appuser'@'172.%' IDENTIFIED BY 'Pa$$w0rd';
+GRANT INSERT, SELECT, UPDATE, DELETE ON * TO 'appuser'@'172.%';
+DROP USER 'root'@'%';
