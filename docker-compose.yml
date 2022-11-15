@@ -19,10 +19,13 @@ services:
   database:
     image: mysql:8.0.31
     env_file:
-        - ./env/database.env
+      - ./env/database.env
     container_name: comp3335-database
     volumes:
-      - ./database:/docker-entrypoint-initdb.d
+      - ./database/sql:/docker-entrypoint-initdb.d
+      - ./database/config:/etc/mysql/conf.d
+      - ./database/log:/var/log/mysql
+    command: bash -c "chmod 644 /etc/mysql/conf.d/my.cnf && /entrypoint.sh mysqld"
     ports:
       - 3306:3306
     networks:
