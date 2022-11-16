@@ -1,3 +1,4 @@
 app/venv/
+database/data/*
 database/log/*
 env/*.env
