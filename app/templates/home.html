@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center text-dark bg-dark bg-opacity-10">
+    <div class="col-8 align-middle p-5">
+        <h3>Welcome back, {{ username }}!</h3>
+        <br>
+        <form class="bg-dark bg-opacity-25 shadow-lg p-2" action="{{ url_for('post') }}" method="post"
+              novalidate>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="msg">{{ message }}</div>
+            {% endif %}
+            {% endwith %}
+            <br>
+            <div>
+                <label for="title" class="form-label">
+                    Title
+                </label>
+                <input class="form-control" type="text" name="title" id="title"
+                       required>
+            </div>
+            <br>
+            <div>
+                <label for="content" class="form-label">
+                    Content
+                </label>
+                <textarea class="form-control" name="content" id="content" rows="3"
+                          required></textarea>
+            </div>
+            <br>
+            <div class="justify-content-center text-center">
+                <input class="btn btn-dark" type="submit" value="Post">
+            </div>
+        </form>
+        {% for post in posts %}
+        <br>
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <strong>User: {{ post[1] }}</strong>
+                {% if post[1] == username %}
+                <a href="/delete_post/{{ post[0] }}" type="button" class="btn-close"></a>
+                {% endif%}
+            </div>
+            <div class="card-body text-center">
+                <h5 class="card-title">{{ post[2] }}</h5>
+                <p class="card-text">{{ post[3] }}</p>
+            </div>
+            <div class="card-footer text-muted text-center">
+                {{ post[4] }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

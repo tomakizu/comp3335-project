@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center text-dark bg-warning bg-opacity-10">
+        <div class="col-8 align-middle p-5">
+            <h1>Register</h1>
+            <br>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link text-warning" aria-current="page" href="{{ url_for('login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link bg-warning bg-opacity-25 p-2 text-dark active">Register</a>
+                </li>
+            </ul>
+            <form class="bg-warning bg-opacity-25 shadow-lg p-2" action="{{ url_for('register') }}"
+                  method="post"
+                  novalidate>
+                <div class="msg">{{ msg }}</div>
+                <br>
+                <div>
+                    <label for="username" class="form-label">
+                        Username
+                    </label>
+                    <input class="form-control" type="text" name="username" id="username"
+                           required>
+                </div>
+                <br>
+                <div>
+                    <label for="password" class="form-label">
+                        Password
+                    </label>
+                    <input class="form-control" type="password" name="password" id="password"
+                           required>
+                </div>
+                <br>
+                <div class="justify-content-center text-center">
+                    <input class="btn btn-warning" type="submit" value="Register">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
