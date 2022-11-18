@@ -28,7 +28,7 @@ services:
       - ./database/data:/var/lib/mysql
     command: bash -c "chmod 644 /etc/mysql/conf.d/my.cnf && /entrypoint.sh mysqld"
     ports:
-      - 3306:3306
+      - 3307:3306
     networks:
       - comp3335-project
 
