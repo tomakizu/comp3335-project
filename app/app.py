@@ -2,9 +2,12 @@ import mysql.connector
 import os
 import re
 from flask import Flask, render_template, request, redirect, url_for, session, flash
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_bcrypt import Bcrypt
 
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 
 app.secret_key = os.urandom(32).hex()
 
@@ -27,14 +30,17 @@ def login():
         if not re.match("^[A-Za-z0-9_-]*$", username):
             msg = 'Username must contain only characters and numbers!'
         else:
-            cursor.execute('SELECT * FROM user WHERE username = %s AND password = %s', (username, password,))
+            cursor.execute('SELECT * FROM user WHERE username = %s', (username,))
             user = cursor.fetchone()
-            if user:
+            if user and bcrypt.check_password_hash(user[1], password):
                 session['loggedin'] = True
                 session['username'] = username
                 return redirect(url_for('home'))
+                msg = 'Incorrect username!'
+            elif user and not bcrypt.check_password_hash(user[1], password):
+                msg = 'Incorrect password!'
             else:
-                msg = 'Incorrect username/password!'
+                msg = 'Incorrect username!'
     return render_template('login.html', msg=msg)
 
 @app.route('/logout')
@@ -59,7 +65,7 @@ def register():
             msg = 'Please fill out the form!'
         else:
             sql = "INSERT INTO user (username, password) VALUES (%s, %s)"
-            val = (username, password)
+            val = (username, bcrypt.generate_password_hash(password))
             cursor.execute(sql, val)
             database.commit()
             msg = 'You have successfully registered!'
