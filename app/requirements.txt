@@ -8,3 +8,4 @@ MarkupSafe==2.0.1
 Werkzeug==2.0.2
 mysql-connector-python==8.0.28
 flask-mysql==1.5.2
+pycryptodomex==3.15.0
