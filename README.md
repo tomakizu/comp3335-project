@@ -35,7 +35,7 @@ Variable|Description
 `MYSQL_DATABASE`| The name of the database; this value should be the same as `DB_DATABASE` defined in `env/app.env`
 `MYSQL_ROOT_PASSWORD`| The password of `'root'@'localhost'`
 ### Sample env File Input
-If you are just want to test the functionality of the system, you may simply copy and paste the following code into the corresponding file.
+If you just want to test the functionality of the system, you may simply copy and paste the following code into the corresponding file.
 #### `env/app.env`
 ```
 DB_HOST=database
