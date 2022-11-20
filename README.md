@@ -10,8 +10,8 @@ This project conducts different security authentication and authorization betwee
     * [Stop the Container](#stop-the-container)
 
 # Pre-requisite
-- The latest version of Docker
-- At least 2GB storage
+- The latest version of [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- At least 2GB of local storage
 # Installation
 
 ## Generate Environment Variable File
