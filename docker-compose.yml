@@ -16,6 +16,7 @@ services:
     networks:
       - comp3335-project
     container_name: comp3335-app
+    restart: always
   database:
     image: mysql:8.0.31
     env_file:
